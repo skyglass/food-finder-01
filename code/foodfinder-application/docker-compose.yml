@@ -51,8 +51,25 @@ services:
         # keep container alive for installing next.js
         tty: true
         command: "npm run dev"
-        user: ${MY_USER}
     
+    # front end testing with jest
+    jest:
+        # name the container to find it later
+        container_name: foodfinder-jest
+        image: node:lts-alpine
+        # configure working directory for running the jest
+        working_dir: /home/node/code/foodfinder-application
+        volumes:
+            # map current directory to the working directory
+            - ./code:/home/node/code
+        # this container depends on a running backend container
+        depends_on:
+            - backend
+        environment:
+            - NODE_ENV=test
+        # keep container alive for installing next.js
+        tty: true
+        command: "npm run testWatch"
 # configure data and node modules as shared volumes 
 volumes:
     mongodb_data_container:
