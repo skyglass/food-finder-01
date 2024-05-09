@@ -5,7 +5,10 @@ services:
         # name the container to find it later
         container_name: foodfinder-backend
         # use the precompiled official mongo image from the docker registry
-        image: mongo:latest
+        image: mongodb
+        build:
+            context: ./mongodb
+            dockerfile: Dockerfile
         restart: always
         environment:
             # configure database name
@@ -18,7 +21,6 @@ services:
         # sync files between host and container
         volumes:
             # map seed script
-            - ./.docker/foodfinder-backend/seed-mongodb.js:/docker-entrypoint-initdb.d/seed-mongodb.js
             # map mongoDB database to a shared volume to persist the data
             - mongodb_data_container:/data/db
 
@@ -51,7 +53,6 @@ services:
         # keep container alive for installing next.js
         tty: true
         command: "npm run dev"
-        user: ${MY_USER}
     
 # configure data and node modules as shared volumes 
 volumes:
