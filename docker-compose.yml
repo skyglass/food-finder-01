@@ -27,19 +27,22 @@ services:
     # front end with node.js and next.js
     application:
         # name the container to find it later
+        build: 
+            context: ./application
+            dockerfile: Dockerfile-dev
         container_name: foodfinder-application
-        image: node:lts-alpine
+        # image: node:lts-alpine
         # configure working directory for installing next.js
         # working_dir: /home/node/code/
         # configure working directory for running the application
-        working_dir: /home/node/code/foodfinder-application
+        working_dir: /home/node/application
         # configure ports, map the container port to the host’s. the application listens to port 3000 (container) and is available at localhost:3000 (host) 
         ports:
             - "3000:3000"
         # sync files between host and container
         volumes:
             # map current directory to the working directory
-            - ./code:/home/node/code
+            - ./application:/home/node/application
         # this container depends on a running backend container
         depends_on:
             - backend
@@ -50,9 +53,6 @@ services:
             - HOST=0.0.0.0
             - CHOKIDAR_USEPOLLING=true
             - CHOKIDAR_INTERVAL=100
-        # keep container alive for installing next.js
-        tty: true
-        command: "npm run dev"
     
 # configure data and node modules as shared volumes 
 volumes:
