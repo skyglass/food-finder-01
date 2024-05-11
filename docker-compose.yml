@@ -1,9 +1,9 @@
 version: "3.0"
 services:
     # MongoDB
-    backend:
+    mongodb:
         # name the container to find it later
-        container_name: foodfinder-backend
+        container_name: foodfinder-mongodb
         # use the precompiled official mongo image from the docker registry
         image: mongodb
         build:
@@ -43,9 +43,9 @@ services:
         volumes:
             # map current directory to the working directory
             - ./application:/home/node/application
-        # this container depends on a running backend container
+        # this container depends on a running mongodb container
         depends_on:
-            - backend
+            - mongodb
         environment:
             # set node environment to development
             # - NODE_ENV=development
