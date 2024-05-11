@@ -1,5 +1,4 @@
 import GithubProvider from "next-auth/providers/github";
-import Chapter10Provider from "chapter10-provider/index";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import { createHash } from "crypto";
@@ -15,10 +14,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             GithubProvider({
                 clientId: process.env.GITHUB_CLIENT_ID || "",
                 clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
-            }),
-            Chapter10Provider({
-                clientId: process.env.CUSTOM_CLIENT_ID || "",
-                clientSecret: process.env.CUSTOM_CLIENT_SECRET || "",
             }),
         ],
 
