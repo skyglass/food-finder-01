@@ -10,11 +10,11 @@ import mongoose, { ConnectOptions } from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI || "";
 
-if (!MONGO_URI.length) {
+/*if (!MONGO_URI.length) {
     throw new Error(
         "Please define the MONGO_URI environment variable (.env.local)"
     );
-}
+} */
 // A global variable maintains a connection across hot reloads.
 // It prevents connections growing exponentially.
 let cached = global.mongoose;
