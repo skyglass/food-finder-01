@@ -65,7 +65,10 @@ export async function updateWishlist(
     action: string
 ) {
     let filter = { location_id: location_id };
-    let options = { upsert: true, returnDocument: "after" };
+    let options: {
+        upsert: boolean;
+        returnDocument: "before" | "after" | undefined;
+    } = { upsert: true, returnDocument: 'after' };
     let update = {};
 
     switch (action) {

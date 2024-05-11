@@ -82,3 +82,5 @@ out
 graphql_schema.json
 .graphql_cache
 .graphql_ppx_cache
+
+scripts/production-kub/application.yaml.secret

@@ -21,16 +21,20 @@ spec:
       containers: 
       - name: application
         image: $CONTAINER_REGISTRY/application:1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
-        - name: PORT
-          value: 3000
-        - name: HOST
-          value: 0.0.0.0
         - name: CHOKIDAR_USEPOLLING
-          value: true
+          value: "true"
         - name: CHOKIDAR_INTERVAL
-          value: 100
+          value: "100"
+        - name: MONGO_URI
+          value: "$MONGO_URI"
+        - name: GITHUB_CLIENT_ID
+          value: "$GITHUB_CLIENT_ID"
+        - name: GITHUB_CLIENT_SECRET
+          value: "$GITHUB_CLIENT_SECRET"
+        - name: NEXTAUTH_SECRET
+          value: "$NEXTAUTH_SECRET"     
 ---
 apiVersion: v1
 kind: Service

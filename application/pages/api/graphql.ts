@@ -6,8 +6,15 @@ import { typeDefs } from "graphql/schema";
 import dbConnect from "middleware/db-connect";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
+import { JWT } from "next-auth/jwt/types";
+
+// Define contextInterface including imported JWT or null
+interface contextInterface {
+    token: JWT | null;
+}
+
 //@ts-ignore
-const server = new ApolloServer({
+const server = new ApolloServer<contextInterface>({
     resolvers,
     typeDefs,
 });

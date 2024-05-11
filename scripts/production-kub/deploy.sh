@@ -12,7 +12,7 @@ set -u # or set -o nounset
 #
 # Build Docker images.
 #
-docker build -t $CONTAINER_REGISTRY/mongodb:1 --file ../../metadata/Dockerfile ../../mongodb
+docker build -t $CONTAINER_REGISTRY/mongodb:1 --file ../../mongodb/Dockerfile ../../mongodb
 docker push $CONTAINER_REGISTRY/mongodb:1
 
 docker build -t $CONTAINER_REGISTRY/application:1 --file ../../application/Dockerfile-prod ../../application
@@ -24,5 +24,5 @@ docker push $CONTAINER_REGISTRY/application:1
 # Don't forget to change kubectl to your production Kubernetes instance
 #
 
-kubectl apply -f mongodb.yaml 
+envsubst < mongodb.yaml | kubectl apply -f -
 envsubst < application.yaml | kubectl apply -f -
