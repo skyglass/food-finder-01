@@ -1,9 +1,3 @@
-# food-finder-01
-
-### The source code for `The Complete Developer`Book: https://www.usemodernfullstack.dev/
-
-### The book is also available with O'Reilly subscription: https://learning.oreilly.com/library/view/the-complete-developer/9781098168810/
-
 ### 📖 Azure Startup Template For Cloud-Native Microservices
 
 <ul style="list-style-type:disc">
@@ -33,8 +27,13 @@
   </ul>
 </ul>
 
+### 📖 Links
 
-### 📖 Step By Step Guide
+- `The Complete Developer`Book: https://www.usemodernfullstack.dev/
+- The book is also available with O'Reilly subscription: https://learning.oreilly.com/library/view/the-complete-developer/9781098168810/
+
+
+## 📖 Step By Step Guide
 
 ### Step 01 - Create New Github Repository
 
