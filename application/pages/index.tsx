@@ -22,7 +22,7 @@ const Home: NextPage = (
                 <meta name="description" content="The Food Finder - Home" />
             </Head>
 
-            <h1>Welcome to the Food Finder!</h1>
+            <h1>Welcome BACK to the Food Finder!</h1>
             <LocationsList locations={locations} />
         </div>
     );

@@ -57,7 +57,7 @@
 - If you test locally, make sure that URLs start with `http://localhost:3000/` (see `Local Docker Environment Setup` for more details)
 
 
-### Step-04: Prepare API Source Code and Github Actions Workflow:
+### Step-05: Prepare API Source Code and Github Actions Workflow:
 
 - Edit "**.github/workflows/application.yaml**" file: replace "**master**" with the name of your main branch (you can change default main branch name in github repository settings)
 
@@ -67,7 +67,7 @@
 
 
 
-#### Local Docker Environment Setup:
+## Local Docker Environment Setup:
 
 - Create a GitHub OAuth App (Github -> Settings -> Developer Settings -> OAuth Apps -> New OAuth App)
 
@@ -90,10 +90,11 @@ docker-compose up -d
 
 - open `localhost:3000` in your Browser and make sure that `Sign In` with Github Credentials works and you can see the test data
 
+
 - Congratulations! You successfuly tested `Food Finder UI` locally!
 
 
-#### Azure Production Environment Setup:
+## Azure Production Environment Setup:
 
 - create `terraform.auto.tfvars` file in `infra` folder and provide following parameters:
 
@@ -115,17 +116,21 @@ location = "westeurope"
 az aks get-credentials --resource-group {app_name} --name {app_name}
 ```
 
+- run `kubectl get pods` and make sure that `kubectl` works correctly and return 0 resources
+
 - login to Azure Container registry with the following command:
 
-````
-login {login_server}
+```
+docker login {login_server}
 ```
 
-- you can find login server, username and password in Azure Cloud (go to Container Registry -> Settings -> Access Keys)
+- run `docker images` and make sure that `docker images` returns docker images from your container registry (should be 0 images when login first time)
+
+- you can find docker login server, username and password in Azure Cloud (go to Container Registry -> Settings -> Access Keys)
 
 - set environment variables CONTAINER_REGISTRY, AUTH_CLIENT_ID (Github OAuth Client ID) and AUTH_CLIENT_SECRET (Github OAuth Client Secret):
 
-````
+```
 export CONTAINER_REGISTRY=...
 export AUTH_CLIENT_ID=...
 export AUTH_CLIENT_SECRET=...
@@ -133,25 +138,26 @@ export AUTH_CLIENT_SECRET=...
 
 - cd to `scripts/production` folder
 
-- replace `NEXTAUTH_URL`in `application.yaml` with `EXTERNAL_IP` of `application` service (run `kubectl get svc` to find this value)
+- replace `NEXTAUTH_URL` in `application.yaml` with `EXTERNAL_IP` of `application` service (run `kubectl get svc` to find this value)
 
-- run `sh deploy.sh``
+- run `sh deploy.sh`
 
 - this script will build docker images, push them to container registry and deploy images to kubernetes cluster
 
 - run `kubectl get pods` and make sure that `application` and `mongodb` containers are RUNNING
 
-- Create a GitHub OAuth App (Github -> Settings -> Developer Settings -> OAuth Apps -> New OAuth App)
+- Update a GitHub OAuth App (Github -> Settings -> Developer Settings -> OAuth Apps)
 
-- Make sure that URLs start with EXTERNAL_IP of your application service (run `kubectl get svc` to find this value)
+- Make sure that GitHub OAuth App URLs start with EXTERNAL_IP of your application service (run `kubectl get svc` to find this value)
 
 - open `EXTERNAL_IP` in your Browser and make sure that `Sign In` with Github Credentials works and you can see the test data
+
 
 - Congratulations! You successfuly tested `Food Finder UI` in Azure Production Environment!
 
 
 
-#### Github Actions Deployment Pipeline Setup
+## Github Actions Deployment Pipeline Setup
 
 - cd to `scripts/cd` folder
 
@@ -159,13 +165,13 @@ export AUTH_CLIENT_SECRET=...
 
 - create the following Github Secrets (Go to Your Repository -> Settings -> Secrets and Variables -> Actions -> New Repository Secret):
 
-````
+```
 CONTAINER_REGISTRY=... (Azure Container Registry)
 AUTH_CLIENT_ID=... (Github OAuth App Client ID)
 AUTH_CLIENT_SECRET=... (Github OAuth App Client Secret)
 KUBE_CONFIG=.. (Base64 encoded  ~/.kube/config file contents)
-REGISTRY_UN= (Azure Container Registry Username)
-REGISTRY_PW= (Azure Container Registry Password)
+REGISTRY_UN=... (Azure Container Registry Username)
+REGISTRY_PW=... (Azure Container Registry Password)
 ```
 
 - you can find values for CONTAINER_REGISTRY, REGISTRY_UN and REGISTRY_PW in Azure Cloud (go to Container Registry -> Settings -> Access Keys)
@@ -183,6 +189,7 @@ REGISTRY_PW= (Azure Container Registry Password)
 - this pipeline will build changed docker image, push it to container registry and deploy changed image with new version to kubernetes cluster
 
 - open `EXTERNAL_IP` in your Browser and make sure that you can see `Welcome BACK to the Food Finder` title
+
 
 - Congratulations! You successfuly tested `Food Finder UI` code changes with Github Actions Deployment Pipeline!
 
