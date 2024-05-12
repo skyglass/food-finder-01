@@ -82,3 +82,10 @@ out
 graphql_schema.json
 .graphql_cache
 .graphql_ppx_cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
