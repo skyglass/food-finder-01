@@ -123,8 +123,6 @@ az aks get-credentials --resource-group {app_name} --name {app_name}
 docker login {login_server}
 ```
 
-- run `docker images` and make sure that `docker images` returns docker images from your container registry (should be 0 images when login first time)
-
 - you can find docker login server, username and password in Azure Cloud (go to Container Registry -> Settings -> Access Keys)
 
 - set environment variables CONTAINER_REGISTRY, AUTH_CLIENT_ID (Github OAuth Client ID) and AUTH_CLIENT_SECRET (Github OAuth Client Secret):
