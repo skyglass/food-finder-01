@@ -135,9 +135,11 @@ export AUTH_CLIENT_SECRET=...
 
 - cd to `scripts/production` folder
 
+- run `sh deploy.sh`
+
 - replace `NEXTAUTH_URL` in `application.yaml` with `EXTERNAL_IP` of `application` service (run `kubectl get svc` to find this value)
 
-- run `sh deploy.sh`
+- run `sh deploy.sh` again to apply updated `NEXTAUTH_URL` environment variable
 
 - this script will build docker images, push them to container registry and deploy images to kubernetes cluster
 
