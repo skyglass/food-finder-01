@@ -3,8 +3,18 @@
 #
 # Usage:
 #
-#   ./scripts/production-kub/deploy.sh
+#   ./scripts/production/deploy.sh
 #
+
+# Source the .env.prod file to load the environment variables
+if [ -f .env.prod ]; then
+  set -o allexport
+  source .env.prod
+  set +o allexport
+else
+  echo ".env.prod file not found"
+  exit 1
+fi
 
 set -u # or set -o nounset
 : "$CONTAINER_REGISTRY"
