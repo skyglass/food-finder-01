@@ -36,7 +36,7 @@ spec:
         - name: NEXTAUTH_SECRET
           value: "60477026caac35080b244a879eb84873"
         - name: NEXTAUTH_URL
-          value: "http://172.211.209.153"
+          value: "http://skycomposer.net"
 ---
 apiVersion: v1
 kind: Service
